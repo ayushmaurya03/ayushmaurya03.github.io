@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayush Maurya | Mechanical Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #151515;
+      --card: #1a1a1a;
+      --border: #2a2a2a;
+      --accent: #c8a96e;
+      --accent2: #7eb8c8;
+      --text: #f0ede8;
+      --muted: #888880;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.4; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(13,13,13,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 6rem 3rem 4rem; position: relative; overflow: hidden; }
+    .hero-bg-circle { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .hero-bg-circle.c1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(200,169,110,0.12), transparent 70%); top: -100px; right: -100px; }
+    .hero-bg-circle.c2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(126,184,200,0.08), transparent 70%); bottom: 50px; left: -80px; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: center; }
+    .hero-tag { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-name { font-family: var(--serif); font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+    .hero-name span { color: var(--accent); }
+    .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+    .btn { padding: 0.75rem 1.8rem; border-radius: 3px; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; cursor: pointer; border: none; display: inline-block; }
+    .btn-primary { background: var(--accent); color: #0d0d0d; }
+    .btn-primary:hover { background: #dfc089; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,169,110,0.3); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-photo-wrap { position: relative; opacity: 0; animation: fadeIn 1s 0.5s forwards; }
+    .hero-photo-wrap::before { content: ''; position: absolute; inset: -12px; border: 1px solid var(--accent); border-radius: 4px; opacity: 0.3; transform: rotate(2deg); }
+    .hero-photo-wrap::after { content: ''; position: absolute; inset: -6px; border: 1px solid var(--accent2); border-radius: 4px; opacity: 0.2; transform: rotate(-1deg); }
+    .hero-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 4px; display: block; filter: grayscale(15%); }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; margin-bottom: 3rem; }
+    .divider { height: 1px; background: linear-gradient(to right, var(--accent), transparent); margin-bottom: 3rem; opacity: 0.3; }
+
+    /* ABOUT */
+    #about { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1rem; }
+    .about-text p:first-child { font-size: 1.1rem; color: var(--text); }
+    .about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .about-photos img { width: 100%; border-radius: 4px; object-fit: cover; aspect-ratio: 1/1; filter: grayscale(20%); transition: filter 0.3s; border: 1px solid var(--border); }
+    .about-photos img:hover { filter: grayscale(0%); }
+    .about-photos img:first-child { grid-column: 1 / -1; aspect-ratio: 16/9; }
+    .interest-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .tag { padding: 0.4rem 0.9rem; background: var(--card); border: 1px solid var(--border); border-radius: 2px; font-size: 0.78rem; color: var(--muted); font-family: var(--mono); transition: all 0.2s; }
+    .tag:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* EXPERIENCE TIMELINE */
+    #experience { background: var(--bg); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent); opacity: 0.4; }
+    .timeline-item { position: relative; padding-left: 2.5rem; padding-bottom: 3.5rem; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot { position: absolute; left: -2rem; top: 0.4rem; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px rgba(200,169,110,0.5); transform: translateX(-4.5px); }
+    .timeline-dot.b { background: var(--accent2); box-shadow: 0 0 12px rgba(126,184,200,0.5); }
+    .timeline-date { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .timeline-role { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .timeline-company { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 0.8rem; }
+    .timeline-desc { color: var(--muted); font-size: 0.95rem; max-width: 620px; }
+
+    /* SKILLS */
+    #skills { background: var(--surface); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.8rem; transition: border-color 0.3s, transform 0.3s; }
+    .skill-group:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-group-title { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .skill-list li { font-size: 0.88rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; }
+    .skill-list li::before { content: '▸'; color: var(--accent2); font-size: 0.7rem; }
+
+    /* PROJECTS */
+    #projects { background: var(--bg); }
+    .projects-tabs { display: flex; gap: 0; margin-bottom: 2.5rem; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; width: fit-content; }
+    .tab-btn { padding: 0.65rem 1.6rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--muted); border: none; cursor: pointer; transition: all 0.2s; }
+    .tab-btn.active { background: var(--accent); color: #0d0d0d; }
+    .tab-btn:hover:not(.active) { color: var(--text); }
+    .projects-panel { display: none; }
+    .projects-panel.active { display: block; }
+
+    /* Project detail cards */
+    .project-detail { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem; margin-bottom: 2rem; transition: border-color 0.3s; }
+    .project-detail:hover { border-color: var(--accent); }
+    .project-detail-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .project-detail-header img { height: 50px; object-fit: contain; filter: brightness(0.9); }
+    .project-detail-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; }
+    .project-detail-subtitle { font-size: 0.85rem; color: var(--accent2); font-family: var(--mono); margin-top: 0.2rem; }
+    .project-body { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .project-text p { color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem; }
+    .project-section-label { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.6rem; margin-top: 1.2rem; }
+    .project-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .project-list li { font-size: 0.85rem; color: var(--muted); display: flex; gap: 0.6rem; }
+    .project-list li::before { content: '—'; color: var(--accent2); flex-shrink: 0; }
+    .project-images { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; align-content: start; }
+    .project-images img { width: 100%; border-radius: 3px; object-fit: contain; background: #111; border: 1px solid var(--border); padding: 0.5rem; transition: border-color 0.3s; }
+    .project-images img:hover { border-color: var(--accent); }
+    .project-images img.wide { grid-column: 1 / -1; }
+    .img-caption { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); text-align: center; margin-top: 0.3rem; }
+    .skills-developed { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .skill-tag { padding: 0.3rem 0.8rem; background: rgba(200,169,110,0.08); border: 1px solid rgba(200,169,110,0.25); border-radius: 2px; font-size: 0.72rem; color: var(--accent); font-family: var(--mono); }
+    .project-links { display: flex; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .project-link { padding: 0.5rem 1.2rem; border: 1px solid var(--border); border-radius: 3px; font-size: 0.78rem; color: var(--muted); text-decoration: none; font-family: var(--mono); transition: all 0.2s; }
+    .project-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* CONTACT */
+    #contact { background: var(--surface); text-align: center; }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .contact-link { display: flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.6rem; background: var(--card); border: 1px solid var(--border); border-radius: 3px; color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.25s; }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-text { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+    .footer-accent { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 4rem 1.5rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-photo-wrap { max-width: 300px; margin: 0 auto; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .project-body { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">AM</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="hero-tag">Mechanical Engineer · Data Analytics</p>
+      <h1 class="hero-name">Ayush<br/><span>Maurya</span></h1>
+      <p class="hero-desc">
+        Bay Area native, Boston-trained engineer. Northeastern University graduate in
+        Mechanical Engineering with hands-on co-op experience at Draper Laboratory
+        and QinetiQ.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_f5b35800999c470ba4bc0db0702dec63.pdf" target="_blank" class="btn btn-outline">View Resume</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img
+        class="hero-photo"
+        src="https://static.wixstatic.com/media/85c03d_67eb3e727a814bc782d74a35dad742b2~mv2.jpeg/v1/fill/w_588,h_557,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_4171_HEIC.jpeg"
+        alt="Ayush Maurya"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label reveal">About Me</p>
+    <h2 class="section-title reveal">Engineer by training,<br/>problem-solver by nature.</h2>
+    <div class="divider reveal"></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>Born and raised in the Bay Area, I moved to Boston to pursue my education at Northeastern University, graduating in May 2025 with a B.S. in Mechanical Engineering and a minor in Mathematics.</p>
+        <p>I'm currently enrolled in Northeastern's Graduate Certificate program in Data Analytics Engineering, bridging my mechanical background with modern data-driven approaches.</p>
+        <p>My career interests lie in the medical device and aerospace/defense industries. My passion for engineering was sparked by building with LEGOs as a kid and continued through repairing my own bike in high school.</p>
+        <p>Outside of engineering, I enjoy soccer, tennis, basketball, hiking, traveling, and challenging myself with new recipes in the kitchen.</p>
+        <div class="interest-tags">
+          <span class="tag">Soccer</span>
+          <span class="tag">Tennis</span>
+          <span class="tag">Basketball</span>
+          <span class="tag">Hiking</span>
+          <span class="tag">Traveling</span>
+          <span class="tag">Cooking</span>
+          <span class="tag">Medical Devices</span>
+          <span class="tag">Aerospace & Defense</span>
+        </div>
+      </div>
+      <div class="about-photos reveal">
+        <img src="https://static.wixstatic.com/media/85c03d_67eb3e727a814bc782d74a35dad742b2~mv2.jpeg/v1/fill/w_588,h_557,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_4171_HEIC.jpeg" alt="Ayush Maurya" />
+        <img src="https://static.wixstatic.com/media/85c03d_efa1ea8e38214cc99449e0d19ee1faca~mv2.jpg/v1/fill/w_294,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2023.jpg" alt="Ayush" />
+        <img src="https://static.wixstatic.com/media/85c03d_fb41909ebb9a4415a3c99c39b633f9f6~mv2.jpg/v1/fill/w_294,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2340_JPG.jpg" alt="Ayush" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label reveal">Career</p>
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="divider reveal"></div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">2024 — Present</p>
+        <h3 class="timeline-role">Graduate Certificate Student</h3>
+        <p class="timeline-company">Northeastern University — Data Analytics Engineering</p>
+        <p class="timeline-desc">Continuing education combining quantitative analysis with engineering principles to develop data-driven solutions for complex engineering problems.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot b"></div>
+        <p class="timeline-date">Co-op · 2024</p>
+        <h3 class="timeline-role">Electro-Mechanical Engineer Co-op</h3>
+        <p class="timeline-company">Draper Laboratory</p>
+        <p class="timeline-desc">Performed thermal creep analysis in ANSYS Workbench on proprietary epoxy mold assemblies. Modeled multi-material systems (copper, beryllium, aluminum, epoxy) and presented structural lifespan findings to senior engineers.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">Co-op · 2023</p>
+        <h3 class="timeline-role">Mechanical Engineering Staff Co-op</h3>
+        <p class="timeline-company">QinetiQ</p>
+        <p class="timeline-desc">Designed and assembled inverter stands and torquer sensor adapters for the Electric Sprocket Drive (ESD) system. Worked across SolidWorks, GD&T, machining, and cross-functional collaboration with electrical engineers.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot b"></div>
+        <p class="timeline-date">2021 — 2025</p>
+        <h3 class="timeline-role">B.S. Mechanical Engineering</h3>
+        <p class="timeline-company">Northeastern University · Minor in Mathematics</p>
+        <p class="timeline-desc">Four-year degree with focus on mechanical systems, design, and applied mathematics. Completed two industry co-ops through Northeastern's signature experiential learning program.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label reveal">Capabilities</p>
+    <h2 class="section-title reveal">Skills & Tools</h2>
+    <div class="divider reveal"></div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <p class="skill-group-title">Engineering Software</p>
+        <ul class="skill-list">
+          <li>ANSYS Workbench (FEA, Creep)</li>
+          <li>SolidWorks</li>
+          <li>PTC Creo</li>
+          <li>ABAQUS (FEA)</li>
+          <li>GD&T & Technical Drawings</li>
+          <li>3D Printing & Prototyping</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <p class="skill-group-title">Data & Analytics</p>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>MATLAB</li>
+          <li>Data Analytics Engineering</li>
+          <li>Statistical Analysis</li>
+          <li>Finite Element Analysis</li>
+          <li>Hand Calculations & Verification</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <p class="skill-group-title">Engineering Skills</p>
+        <ul class="skill-list">
+          <li>Thermal & Creep Analysis</li>
+          <li>Fixture Design</li>
+          <li>Machining (Mill, Bandsaw)</li>
+          <li>DFM (Design for Manufacturing)</li>
+          <li>Electro-Mechanical Systems</li>
+          <li>Cross-functional Collaboration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label reveal">Work</p>
+    <h2 class="section-title reveal">Projects</h2>
+    <div class="divider reveal"></div>
+
+    <div class="projects-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('professional')">Professional</button>
+      <button class="tab-btn" onclick="switchTab('academic')">Academic</button>
+    </div>
+
+    <!-- PROFESSIONAL PROJECTS -->
+    <div class="projects-panel active" id="panel-professional">
+
+      <!-- Draper Header -->
+      <div style="margin-bottom:1rem;" class="reveal">
+        <img src="https://static.wixstatic.com/media/85c03d_756edcfc7c6b42aca2a852942ca88f61~mv2.png/v1/fill/w_600,h_70,al_c,q_85,enc_avif,quality_auto/draperclean.png" alt="Draper Laboratory" style="height:50px;object-fit:contain;filter:brightness(1.1);"/>
+      </div>
+
+      <!-- Thermal Creep -->
+      <div class="project-detail reveal">
+        <div class="project-detail-title">Thermal Creep Analysis</div>
+        <div class="project-detail-subtitle">Epoxy Mold Thermal Analysis · Draper Laboratory</div>
+        <div style="margin-top:1.5rem;" class="project-body">
+          <div class="project-text">
+            <p>Tasked with performing a creep analysis in ANSYS to assess Draper's proprietary epoxy mold's deformation over time and determine the assembly's lifespan under specific thermal conditions.</p>
+            <p class="project-section-label">Objective</p>
+            <ul class="project-list">
+              <li>Model and analyze thermal deformation of an assembly composed of copper, beryllium, aluminum, and a proprietary epoxy</li>
+              <li>Determine deformation over time and predict structural lifespan</li>
+            </ul>
+            <p class="project-section-label">Challenges</p>
+            <ul class="project-list">
+              <li>Determine how long the assembly can maintain structural integrity with limited deformation</li>
+              <li>First time performing a creep simulation in ANSYS Workbench — learned independently through forums and documentation</li>
+            </ul>
+            <p class="project-section-label">Results</p>
+            <ul class="project-list">
+              <li>Conducted creep analysis using the Prony shear relaxation model in ANSYS Workbench</li>
+              <li>Incorporated detailed material properties including unique epoxy characteristics</li>
+              <li>Presented findings to task leader (numerical results confidential)</li>
+            </ul>
+            <div class="skills-developed">
+              <span class="skill-tag">ANSYS Workbench</span>
+              <span class="skill-tag">Thermal Creep Analysis</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_cb472bd9a26f4707b042665bf2f310dd~mv2.png/v1/fill/w_541,h_336,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/creep_model_change.png" alt="Creep Model" class="wide"/>
+              <p class="img-caption">Thermal Conditions in ANSYS — Example Model</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_facdc8b84df7454e87ebc875e2b96b2b~mv2.png/v1/fill/w_541,h_389,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/creep_thermal.png" alt="Creep Thermal" class="wide"/>
+              <p class="img-caption">Results of Example Assembly</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QinetiQ Header -->
+      <div style="margin:2rem 0 1rem;" class="reveal">
+        <img src="https://static.wixstatic.com/media/85c03d_30a823a94ae74bcc8e70dcc7664da024~mv2.jpg/v1/fill/w_600,h_219,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/qinetiqclean_jfif.jpg" alt="QinetiQ" style="height:60px;object-fit:contain;filter:brightness(1.1);border-radius:4px;"/>
+      </div>
+
+      <!-- Inverter Stand -->
+      <div class="project-detail reveal">
+        <div class="project-detail-title">Electric Sprocket Drive — Inverter Stand</div>
+        <div class="project-detail-subtitle">QinetiQ · SolidWorks, GD&T, Machining</div>
+        <div style="margin-top:1.5rem;" class="project-body">
+          <div class="project-text">
+            <p>Working with a team of mechanical and electrical engineers, I modified and completed subcomponents in the larger Electric Sprocket Drive (ESD) assembly — specifically the Inverter Stand.</p>
+            <p class="project-section-label">Objective</p>
+            <ul class="project-list">
+              <li>Design, procure, assemble, and create GD&T drawings for two inverter stands</li>
+              <li>Ensure copper busbars are up to standard with electrical components</li>
+            </ul>
+            <p class="project-section-label">Results</p>
+            <ul class="project-list">
+              <li>Collaborated with electrical engineer on busbar specs</li>
+              <li>Added rubber pads to fix inverter positions</li>
+              <li>Used mill and bandsaw to manufacture components in-house</li>
+            </ul>
+            <div class="skills-developed">
+              <span class="skill-tag">SolidWorks</span>
+              <span class="skill-tag">GD&T</span>
+              <span class="skill-tag">Fixture Design</span>
+              <span class="skill-tag">Machining</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_ac8b56cabbb646b8862e492fe053c1ba~mv2.png/v1/fill/w_302,h_308,al_c,q_85,enc_avif,quality_auto/3d_inverterstand.png" alt="3D Inverter Stand" class="wide"/>
+              <p class="img-caption">SolidWorks Model of Inverter Stand</p>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+              <div>
+                <img src="https://static.wixstatic.com/media/85c03d_288b56ffcaf14218a15785426f72c8cd~mv2.jpg/v1/fill/w_226,h_303,al_c,lg_1,q_80,enc_avif,quality_auto/irl_inverterstand.jpg" alt="Inverter Stand 1"/>
+                <p class="img-caption">First Assembled Stand</p>
+              </div>
+              <div>
+                <img src="https://static.wixstatic.com/media/85c03d_1ab948aeb6784027b8622bfb48645763~mv2.jpg/v1/fill/w_226,h_303,al_c,lg_1,q_80,enc_avif,quality_auto/irl_inverterstand2.jpg" alt="Inverter Stand 2"/>
+                <p class="img-caption">Second Assembled Stand</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Torquer Sensor -->
+      <div class="project-detail reveal">
+        <div class="project-detail-title">Electric Sprocket Drive — Torquer Sensor Adapters</div>
+        <div class="project-detail-subtitle">QinetiQ · SolidWorks DFM, GD&T</div>
+        <div style="margin-top:1.5rem;" class="project-body">
+          <div class="project-text">
+            <p>The ESD included a torquer sensor to measure torque from the driven motor. I designed adapters to connect the drive motor to the sensor and a stand to raise the sensor to the correct height.</p>
+            <p class="project-section-label">Objective</p>
+            <ul class="project-list">
+              <li>Design adapters with specific hole patterns to mount to each motor</li>
+              <li>Create a stand to raise the torquer sensor to the required height</li>
+            </ul>
+            <p class="project-section-label">Results</p>
+            <ul class="project-list">
+              <li>Designed the adapter like a spool to satisfy assembly clearance requirements</li>
+              <li>Added lifting holes on the outer edge for easy handling during assembly</li>
+              <li>Performed DFM by adding fillets and chamfers for third-party machining</li>
+            </ul>
+            <div class="skills-developed">
+              <span class="skill-tag">SolidWorks DFM</span>
+              <span class="skill-tag">GD&T Drawings</span>
+              <span class="skill-tag">Third-party Manufacturing</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_a8374bcbbd95454982aec042a0497135~mv2.png/v1/fill/w_206,h_202,al_c,lg_1,q_85,enc_avif,quality_auto/adapter.png" alt="Adapter Front"/>
+              <p class="img-caption">Front ISO View of Adapter</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_1b80cb6f00a54d8c80f465cf3b37a723~mv2.png/v1/fill/w_283,h_277,al_c,lg_1,q_85,enc_avif,quality_auto/adapter2.png" alt="Adapter Back"/>
+              <p class="img-caption">Back ISO View of Adapter</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_6bb820fa7631401fa2f704a663d0b64e~mv2.png/v1/fill/w_192,h_202,al_c,lg_1,q_85,enc_avif,quality_auto/sensor_stand.png" alt="Sensor Stand"/>
+              <p class="img-caption">Stand for Torquer Sensor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TALON Robot -->
+      <div class="project-detail reveal">
+        <div class="project-detail-title">TALON Robot — PTZ Camera Mount Prototype</div>
+        <div class="project-detail-subtitle">QinetiQ · PTC Creo, 3D Printing</div>
+        <div style="margin-top:1.5rem;" class="project-body">
+          <div class="project-text">
+            <p>The TALON required redesign due to interference between the rotating arm and Pan Tilt Zoom (PTZ) camera. I designed a clamp and extension arm to eliminate the collision.</p>
+            <p class="project-section-label">Objective</p>
+            <ul class="project-list">
+              <li>Design and prototype a clamp matching the TALON's dimensions</li>
+              <li>Create an attachment that is easy to remove</li>
+              <li>Multiple mounting points so the camera can be repositioned</li>
+            </ul>
+            <p class="project-section-label">Results</p>
+            <ul class="project-list">
+              <li>Hand calculations performed to verify no bending failure</li>
+              <li>Successfully designed and 3D printed a strong first prototype</li>
+            </ul>
+            <div class="skills-developed">
+              <span class="skill-tag">PTC Creo</span>
+              <span class="skill-tag">3D Printing</span>
+              <span class="skill-tag">Prototyping</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_ed2ffb294ddc43dd81f8f297d679a9f5~mv2.png/v1/fill/w_214,h_113,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/initialarm.png" alt="Initial Arm"/>
+              <p class="img-caption">Initial Arm Design</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_88d06aa9aa97427ab7cc3fe22f90552a~mv2.png/v1/fill/w_190,h_142,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/initialcap.png" alt="Initial Cap"/>
+              <p class="img-caption">Initial Cap Design</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_49bd9bf546034e628644cb6a3fade33c~mv2.png/v1/fill/w_196,h_161,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/finalarm.png" alt="Final Arm"/>
+              <p class="img-caption">Final Arm Design</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_3a94012ff78646c7b8c6c9a8f34f7a29~mv2.png/v1/fill/w_218,h_163,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/finalmount.png" alt="Final Mount"/>
+              <p class="img-caption">Final Mount</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_af4e069ca17541e1af4982073b9083ca~mv2.png/v1/fill/w_208,h_141,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/finalptz.png" alt="Final PTZ"/>
+              <p class="img-caption">Final PTZ Assembly</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_e9cfff73cdd24fc7b4f2f24a31848003~mv2.jpg/v1/fill/w_209,h_278,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3dmount.jpg" alt="3D Printed Mount"/>
+              <p class="img-caption">3D Printed Prototype</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACADEMIC PROJECTS -->
+    <div class="projects-panel" id="panel-academic">
+
+      <!-- Capstone -->
+      <div class="project-detail reveal">
+        <div class="project-detail-title">Capstone: Proton Therapy Mockup</div>
+        <div class="project-detail-subtitle">Senior Capstone · Client: Varian Medical Systems</div>
+        <div style="margin-top:1.5rem;" class="project-body">
+          <div class="project-text">
+            <p>Proton Therapy uses precise proton beams to destroy tumor sites. Children (ages 6–13) often struggle to stay still during the 45-minute procedure. My team partnered with Varian to design a scaled-down mockup of their proton therapy room to educate and calm pediatric patients.</p>
+            <p class="project-section-label">Objective</p>
+            <ul class="project-list">
+              <li>Design a functional scaled-down model of a proton therapy treatment room</li>
+              <li>Serve as a stress-relieving demonstration for pediatric patients and families</li>
+            </ul>
+            <p class="project-section-label">Design Constraints</p>
+            <ul class="project-list">
+              <li>Must fit within an 18-gallon box and be easy to carry</li>
+              <li>Fully functional moving bed, gantry, and nozzle</li>
+              <li>Interactive and controllable with a video game controller</li>
+            </ul>
+            <p class="project-section-label">Results</p>
+            <ul class="project-list">
+              <li>Two motors providing two degrees of freedom; ball joint enables yaw, pitch, and roll</li>
+              <li>One motor for gantry rotation; linear actuator for nozzle extension/retraction</li>
+            </ul>
+            <div class="skills-developed">
+              <span class="skill-tag">Mechatronics</span>
+              <span class="skill-tag">Stepper Motors</span>
+              <span class="skill-tag">Child Psychology UX</span>
+              <span class="skill-tag">System Design</span>
+            </div>
+            <div class="project-links">
+              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_3302d221200544e7b819e09a7f48d883.pdf" target="_blank" class="project-link">Final Presentation ↗</a>
+              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_db4884fb789243d38186a58ec2602f07.pdf" target="_blank" class="project-link">Executive Summary ↗</a>
+            </div>
+          </div>
+          <div class="project-images">
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_62a415ebfa48443388d648c52b276e12~mv2.png/v1/fill/w_415,h_284,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cadcapstone.png" alt="Capstone CAD" class="wide"/>
+              <p class="img-caption">Proton Therapy Room CAD</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_0d1a57f6f4c44a93b66c47c52b080418~mv2.jpg/v1/fill/w_415,h_343,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/finalcapstone.jpg" alt="Final Capstone" class="wide"/>
+              <p class="img-caption">Final Proton Therapy Room Product</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Basketball Hoop -->
+      <div class="project-detail reveal">
+        <div class="project-detail-title">Basketball Hoop FEA Analysis</div>
+        <div class="project-detail-subtitle">ME4508 Computation & Design · ABAQUS, SolidWorks</div>
+        <div style="margin-top:1.5rem;" class="project-body">
+          <div class="project-text">
+            <p>Performed finite element analysis to determine how much deformation a basketball rim would endure when simulating an average person dunking on the hoop.</p>
+            <p class="project-section-label">Design Constraints</p>
+            <ul class="project-list">
+              <li>5,635 lb load applied to front of rim to simulate a 175 lb person dunking</li>
+              <li>18-inch rim with 8-bolt hole pattern attaching to backboard</li>
+            </ul>
+            <p class="project-section-label">Challenges</p>
+            <ul class="project-list">
+              <li>Finding optimal material where hoop bends but doesn't break for safety</li>
+              <li>Software crashed on mesh sizes smaller than 0.05, limiting accuracy</li>
+            </ul>
+            <p class="project-section-label">Results</p>
+            <ul class="project-list">
+              <li>Carbon steel demonstrated a factor of safety of 818 — the better material</li>
+              <li>Results verified with hand calculations</li>
+            </ul>
+            <div class="skills-developed">
+              <span class="skill-tag">ABAQUS FEA</span>
+              <span class="skill-tag">SolidWorks</span>
+              <span class="skill-tag">Stress Analysis</span>
+              <span class="skill-tag">Factor of Safety</span>
+            </div>
+            <div class="project-links">
+              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_3501c673251c45d9b1492086fdc0b49f.pdf" target="_blank" class="project-link">Final Report ↗</a>
+            </div>
+          </div>
+          <div class="project-images">
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_86844f51ab4c48f999ee691725f0fd16~mv2.png/v1/fill/w_383,h_255,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/rim.png" alt="Rim Model" class="wide"/>
+              <p class="img-caption">SolidWorks Model of Basketball Rim</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_d29aa08266c2447295f020b1330d212b~mv2.png/v1/crop/x_0,y_0,w_624,h_359/fill/w_480,h_276,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/carbonsteelrim.png" alt="Carbon Steel FEA"/>
+              <p class="img-caption">Carbon Steel Displacement</p>
+            </div>
+            <div>
+              <img src="https://static.wixstatic.com/media/85c03d_f3506aa9a8874e1f9cad84b331b23c6c~mv2.png/v1/crop/x_0,y_0,w_499,h_283/fill/w_480,h_272,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aluminumrim.png" alt="Aluminum FEA"/>
+              <p class="img-caption">Aluminum Displacement</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <p class="section-label reveal">Let's Connect</p>
+      <h2 class="section-title reveal">Get In Touch</h2>
+      <div class="divider reveal"></div>
+      <p class="contact-subtitle reveal">Open to opportunities in medical devices, aerospace, and defense engineering.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:ayushmaurya03@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          ayushmaurya03@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/ayushma/" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_f5b35800999c470ba4bc0db0702dec63.pdf" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">© 2025 <span class="footer-accent">Ayush Maurya</span></p>
+  <p class="footer-text">Mechanical Engineer · Bay Area → Boston</p>
+</footer>
+
+<script>
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.projects-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : ''; });
+  });
+</script>
+</body>
+</html>
