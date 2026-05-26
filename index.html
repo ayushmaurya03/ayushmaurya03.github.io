@@ -80,7 +80,7 @@
 
     /* ── ABOUT ── */
     #about { background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; align-items: start; }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 0; align-items: start; max-width: 780px; }
     .about-text p { color: var(--muted); margin-bottom: 1.1rem; font-size: 0.97rem; }
     .about-text p:first-child { color: var(--text); font-size: 1.05rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
@@ -100,6 +100,12 @@
     .tl-company { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 0.3rem; }
     .tl-role { font-family: var(--serif); font-size: 1.45rem; font-weight: 400; margin-bottom: 0.6rem; line-height: 1.2; }
     .tl-desc { font-size: 0.9rem; color: var(--muted); max-width: 620px; }
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.3rem; max-width: 680px; }
+    .tl-bullets li { font-size: 0.88rem; color: var(--muted); display: flex; gap: 0.7rem; line-height: 1.6; }
+    .tl-bullets li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-size: 0.85rem; margin-top: 0.05rem; }
+    .proj-doc-btns { display: flex; gap: 0.8rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .proj-doc-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 5px; font-size: 0.8rem; font-weight: 500; color: var(--text); text-decoration: none; transition: all 0.2s; font-family: var(--sans); }
+    .proj-doc-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
     .tl-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
     .chip { padding: 0.22rem 0.7rem; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.68rem; color: var(--muted); font-family: var(--mono); }
 
@@ -226,7 +232,7 @@
       <div class="hero-btns">
         <a href="#contact" class="btn btn-dark">Get in touch</a>
         <a href="https://www.linkedin.com/in/ayushma/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
-        <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_f5b35800999c470ba4bc0db0702dec63.pdf" target="_blank" class="btn btn-ghost">Resume ↗</a>
+        <a href="Ayush_Maurya_Engineer_Resume.pdf" target="_blank" class="btn btn-ghost">Resume ↗</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
@@ -265,29 +271,23 @@
   <section id="about">
     <div class="section-tag reveal">About</div>
     <h2 class="reveal">Engineer by training,<br/><em>problem-solver</em> by nature.</h2>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>Born and raised in the Bay Area, I moved to Boston to attend Northeastern University, graduating in May 2025 with a B.S. in Mechanical Engineering and a minor in Mathematics.</p>
-        <p>I have completed Northeastern's Graduate Certificate in Data Analytics Engineering, combining my mechanical engineering foundation with modern data-driven approaches including SQL, NoSQL, and analytics pipelines.</p>
-        <p>My career interests center on medical devices and the aerospace & defense industries — fields where precision engineering drives meaningful real-world impact. My passion for engineering was sparked by building LEGOs as a kid and grew through repairing my own bike in high school.</p>
-        <p>Outside of engineering, I enjoy soccer, tennis, basketball, hiking, traveling, and experimenting with new recipes in the kitchen.</p>
-        <div class="tags">
-          <span class="tag">Soccer</span>
-          <span class="tag">Tennis</span>
-          <span class="tag">Basketball</span>
-          <span class="tag">Hiking</span>
-          <span class="tag">Traveling</span>
-          <span class="tag">Cooking</span>
-          <span class="tag">Medical Devices</span>
-          <span class="tag">Aerospace & Defense</span>
-        </div>
-      </div>
-      <div class="about-img-stack reveal">
-        <img src="https://static.wixstatic.com/media/85c03d_efa1ea8e38214cc99449e0d19ee1faca~mv2.jpg/v1/fill/w_294,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2023.jpg" alt="Ayush"/>
-        <div class="img-row">
-          <img src="https://static.wixstatic.com/media/85c03d_fb41909ebb9a4415a3c99c39b633f9f6~mv2.jpg/v1/fill/w_294,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2340_JPG.jpg" alt="Ayush"/>
-          <img src="https://static.wixstatic.com/media/85c03d_67eb3e727a814bc782d74a35dad742b2~mv2.jpeg/v1/fill/w_588,h_557,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_4171_HEIC.jpeg" alt="Ayush Maurya"/>
-        </div>
+    <div class="about-text reveal">
+      <p>Born and raised in the Bay Area, I moved to Boston to attend Northeastern University, graduating in May 2025 with a B.S. in Mechanical Engineering and a minor in Mathematics. I also earned Dean's List honors for the College of Engineering in Spring 2022, Fall 2023, Fall 2024, and Spring 2025.</p>
+      <p>I have completed Northeastern's Graduate Certificate in Data Analytics Engineering, combining my mechanical engineering foundation with modern data-driven approaches including SQL, NoSQL, and analytics pipelines.</p>
+      <p>My career interests center on medical devices and the aerospace & defense industries — fields where precision engineering drives meaningful real-world impact. My passion for engineering was sparked by building LEGOs as a kid and grew through repairing my own bike in high school.</p>
+      <p>Outside of engineering, I enjoy soccer, tennis, basketball, hiking, traveling, and experimenting with new recipes in the kitchen.</p>
+      <div class="tags">
+        <span class="tag">Soccer</span>
+        <span class="tag">Tennis</span>
+        <span class="tag">Basketball</span>
+        <span class="tag">Hiking</span>
+        <span class="tag">Traveling</span>
+        <span class="tag">Cooking</span>
+        <span class="tag">Medical Devices</span>
+        <span class="tag">Aerospace & Defense</span>
+        <span class="tag">Dean's List</span>
+        <span class="tag">ASME</span>
+        <span class="tag">Phi Gamma Delta</span>
       </div>
     </div>
   </section>
@@ -306,7 +306,10 @@
         <div class="tl-right">
           <div class="tl-company">Northeastern University</div>
           <div class="tl-role">Graduate Certificate — Data Analytics Engineering</div>
-          <p class="tl-desc">Completed a Graduate Certificate in Data Analytics Engineering, combining quantitative analysis with engineering principles. Gained hands-on experience with SQL, NoSQL databases, data pipelines, and analytics workflows.</p>
+          <ul class="tl-bullets">
+            <li>Completed coursework combining quantitative analysis with engineering principles</li>
+            <li>Gained hands-on experience with SQL, NoSQL databases, data pipelines, and analytics workflows</li>
+          </ul>
           <div class="tl-chips">
             <span class="chip">SQL</span>
             <span class="chip">NoSQL</span>
@@ -322,14 +325,20 @@
           <div class="tl-type">Co-Op</div>
         </div>
         <div class="tl-right">
-          <div class="tl-company">Draper Laboratory</div>
-          <div class="tl-role">Electro-Mechanical Engineer Co-op</div>
-          <p class="tl-desc">Performed thermal creep analysis using ANSYS Workbench on proprietary epoxy mold assemblies. Modeled multi-material systems and presented structural lifespan findings to senior engineers.</p>
+          <div class="tl-company">Draper Laboratory — Cambridge, MA</div>
+          <div class="tl-role">Electromechanical Engineering Co-op</div>
+          <ul class="tl-bullets">
+            <li>Engineered 10+ CAD models and technical drawings for high-precision inertial guidance sensor fixtures using PTC Creo, implementing GD&T for tight tolerance control</li>
+            <li>Created detailed assembly documentation and manufacturing drawings for complex electromechanical boxes, integrating wiring tables and routing constraints</li>
+            <li>Performed thermal creep analysis in ANSYS to simulate epoxy mold deformation, validating design performance under operational conditions</li>
+            <li>Refined MATLAB simulations to determine safe particulate size thresholds for a capacitive sensor's working fluid, improving reliability and noise performance</li>
+          </ul>
           <div class="tl-chips">
-            <span class="chip">ANSYS Workbench</span>
-            <span class="chip">Thermal Analysis</span>
-            <span class="chip">Creep Simulation</span>
-            <span class="chip">FEA</span>
+            <span class="chip">PTC Creo</span>
+            <span class="chip">ANSYS</span>
+            <span class="chip">MATLAB</span>
+            <span class="chip">GD&T</span>
+            <span class="chip">Technical Drawings</span>
           </div>
         </div>
       </div>
@@ -340,32 +349,43 @@
           <div class="tl-type">Co-Op</div>
         </div>
         <div class="tl-right">
-          <div class="tl-company">QinetiQ</div>
-          <div class="tl-role">Mechanical Engineering Staff Co-op</div>
-          <p class="tl-desc">Designed and assembled inverter stands and torquer sensor adapters for the Electric Sprocket Drive system. Used SolidWorks, GD&T, and in-house machining tools. Prototyped a PTZ camera mount for the TALON robot using PTC Creo and 3D printing.</p>
+          <div class="tl-company">QinetiQ US — Waltham, MA</div>
+          <div class="tl-role">Mechanical Engineer Co-op</div>
+          <ul class="tl-bullets">
+            <li>Collaborated with a cross-functional team of five engineers to design and procure parts for a large test fixture incorporating a sprocket drive</li>
+            <li>Produced CNC-ready CAD models in SolidWorks/Creo with strict GD&T and DFM considerations, optimizing wall thickness, tool clearances, and tolerance stack-ups</li>
+            <li>Redesigned a PTZ camera mount for a TALON robotic platform to resolve arm interference, iterating through rapid prototyping to deliver a collision-free solution</li>
+            <li>Built and mechanically tested 3D-printed prototypes to validate design intent and accelerate design iteration</li>
+            <li>Organized technical drawings, BOMs, and revision history in Windchill for full traceability and document control</li>
+          </ul>
           <div class="tl-chips">
             <span class="chip">SolidWorks</span>
-            <span class="chip">GD&T</span>
-            <span class="chip">Machining</span>
             <span class="chip">PTC Creo</span>
+            <span class="chip">GD&T & DFM</span>
             <span class="chip">3D Printing</span>
+            <span class="chip">Windchill</span>
           </div>
         </div>
       </div>
 
       <div class="tl-item reveal">
         <div class="tl-left">
-          <div class="tl-year">2021—25</div>
+          <div class="tl-year">2021—2025</div>
           <div class="tl-type">Education</div>
         </div>
         <div class="tl-right">
-          <div class="tl-company">Northeastern University</div>
-          <div class="tl-role">B.S. Mechanical Engineering</div>
-          <p class="tl-desc">Four-year degree with a minor in Mathematics. Completed two industry co-ops through Northeastern's signature experiential learning program.</p>
+          <div class="tl-company">Northeastern University — Boston, MA</div>
+          <div class="tl-role">B.S. Mechanical Engineering, Minor in Mathematics</div>
+          <ul class="tl-bullets">
+            <li>Dean's List: Spring 2022, Fall 2023, Fall 2024, and Spring 2025</li>
+            <li>Activities: Phi Gamma Delta, Northeastern Electric Racing, ASME</li>
+            <li>Study Abroad: American College of Thessaloniki, Fall 2021</li>
+          </ul>
           <div class="tl-chips">
-            <span class="chip">Mechanical Engineering</span>
-            <span class="chip">Mathematics Minor</span>
-            <span class="chip">Co-op Program</span>
+            <span class="chip">Dean's List</span>
+            <span class="chip">Electric Racing</span>
+            <span class="chip">ASME</span>
+            <span class="chip">Study Abroad</span>
           </div>
         </div>
       </div>
@@ -379,35 +399,35 @@
     <h2 class="reveal">Skills &amp; <em>Tools</em></h2>
     <div class="skills-grid">
       <div class="skill-col reveal">
-        <div class="skill-col-title">Engineering Software</div>
+        <div class="skill-col-title">CAD & Simulation</div>
         <div class="skill-items">
-          <div class="skill-item">ANSYS Workbench</div>
           <div class="skill-item">SolidWorks</div>
           <div class="skill-item">PTC Creo</div>
+          <div class="skill-item">AutoCAD</div>
+          <div class="skill-item">ANSYS</div>
           <div class="skill-item">ABAQUS</div>
           <div class="skill-item">GD&T & Technical Drawings</div>
-          <div class="skill-item">3D Printing & Prototyping</div>
         </div>
       </div>
       <div class="skill-col reveal">
-        <div class="skill-col-title">Data & Analytics</div>
+        <div class="skill-col-title">Programming & Data</div>
         <div class="skill-items">
           <div class="skill-item">Python</div>
           <div class="skill-item">MATLAB</div>
           <div class="skill-item">SQL</div>
           <div class="skill-item">NoSQL</div>
+          <div class="skill-item">Arduino</div>
           <div class="skill-item">Data Visualization</div>
-          <div class="skill-item">Statistical Analysis</div>
         </div>
       </div>
       <div class="skill-col reveal">
-        <div class="skill-col-title">Engineering Skills</div>
+        <div class="skill-col-title">Engineering & Fabrication</div>
         <div class="skill-items">
           <div class="skill-item">Thermal & Creep Analysis</div>
-          <div class="skill-item">Finite Element Analysis</div>
-          <div class="skill-item">Fixture Design</div>
-          <div class="skill-item">DFM</div>
-          <div class="skill-item">Machining</div>
+          <div class="skill-item">FEA & DFM</div>
+          <div class="skill-item">Milling Machine & Bandsaw</div>
+          <div class="skill-item">3D Printing & Prototyping</div>
+          <div class="skill-item">Windchill (PLM)</div>
           <div class="skill-item">Electro-Mechanical Systems</div>
         </div>
       </div>
@@ -576,9 +596,15 @@
             <div class="proj-chips">
               <span class="chip">Mechatronics</span><span class="chip">Stepper Motors</span><span class="chip">System Design</span><span class="chip">Pediatric UX</span><span class="chip">Linear Actuator</span>
             </div>
-            <div class="proj-links-row">
-              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_3302d221200544e7b819e09a7f48d883.pdf" target="_blank" class="proj-link">Final Presentation ↗</a>
-              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_db4884fb789243d38186a58ec2602f07.pdf" target="_blank" class="proj-link">Executive Summary ↗</a>
+            <div class="proj-doc-btns">
+              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_3302d221200544e7b819e09a7f48d883.pdf" target="_blank" class="proj-doc-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Final Presentation
+              </a>
+              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_db4884fb789243d38186a58ec2602f07.pdf" target="_blank" class="proj-doc-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Executive Summary
+              </a>
             </div>
           </div>
         </div>
@@ -606,8 +632,11 @@
             <div class="proj-chips">
               <span class="chip">ABAQUS</span><span class="chip">SolidWorks</span><span class="chip">FEA</span><span class="chip">Stress Analysis</span><span class="chip">Factor of Safety</span>
             </div>
-            <div class="proj-links-row">
-              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_3501c673251c45d9b1492086fdc0b49f.pdf" target="_blank" class="proj-link">Final Report ↗</a>
+            <div class="proj-doc-btns">
+              <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_3501c673251c45d9b1492086fdc0b49f.pdf" target="_blank" class="proj-doc-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Final Report
+              </a>
             </div>
           </div>
         </div>
@@ -658,7 +687,7 @@
               <span class="contact-link-val">linkedin.com/in/ayushma</span>
             </div>
           </a>
-          <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_f5b35800999c470ba4bc0db0702dec63.pdf" target="_blank" class="contact-link">
+          <a href="Ayush_Maurya_Engineer_Resume.pdf" target="_blank" class="contact-link">
             <div class="contact-link-icon">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             </div>
