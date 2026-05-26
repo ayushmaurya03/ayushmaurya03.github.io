@@ -54,11 +54,12 @@
     h2 em { font-style: italic; color: var(--gold); }
 
     /* ── HERO ── */
-    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 5rem 5.5rem; background: var(--surface); }
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: center; padding: 5rem 5.5rem; background: var(--surface); }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; }
     .hero-tag { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
-    .hero-name { font-family: var(--serif); font-size: clamp(4rem, 7.5vw, 7rem); font-weight: 400; line-height: 1.0; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.25s forwards; }
+    .hero-name { font-family: var(--serif); font-size: clamp(3.5rem, 6vw, 6rem); font-weight: 400; line-height: 1.0; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.25s forwards; }
     .hero-name em { font-style: italic; }
-    .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 580px; margin-bottom: 2.5rem; line-height: 1.8; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+    .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; line-height: 1.8; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
     .hero-desc strong { color: var(--text); font-weight: 500; }
     .hero-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.55s forwards; }
     .btn { padding: 0.68rem 1.6rem; font-family: var(--sans); font-size: 0.83rem; font-weight: 500; text-decoration: none; border-radius: 5px; transition: all 0.2s; display: inline-block; }
@@ -66,10 +67,16 @@
     .btn-dark:hover { opacity: 0.85; }
     .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
     .btn-ghost:hover { border-color: var(--text); background: var(--card); }
-    .hero-stats { display: flex; gap: 3.5rem; flex-wrap: wrap; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border); opacity: 0; animation: fadeUp 0.7s 0.7s forwards; }
+    .hero-stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); opacity: 0; animation: fadeUp 0.7s 0.7s forwards; }
     .stat { display: flex; flex-direction: column; gap: 0.25rem; }
-    .stat-num { font-family: var(--serif); font-size: 3rem; font-weight: 400; line-height: 1; color: var(--text); }
+    .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 400; line-height: 1; color: var(--text); }
     .stat-label { font-family: var(--mono); font-size: 0.63rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    /* Hero photo collage */
+    .hero-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 0.7rem; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+    .hero-photos img { width: 100%; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); display: block; transition: transform 0.3s; }
+    .hero-photos img:hover { transform: scale(1.02); }
+    .hero-photo-main { grid-column: 1 / -1; height: 280px; object-position: center top; }
+    .hero-photo-sm { height: 180px; object-position: center top; }
 
     /* ── ABOUT ── */
     #about { background: var(--bg); }
@@ -170,6 +177,8 @@
       footer { padding: 1.5rem 2rem; }
     }
     @media (max-width: 768px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-photos { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .proj-images { margin-left: 0; }
@@ -208,33 +217,47 @@
 
   <!-- HERO -->
   <section id="hero">
-    <p class="hero-tag">Mechanical Engineer · Data Analytics</p>
-    <h1 class="hero-name">Ayush<br/><em>Maurya.</em></h1>
-    <p class="hero-desc">
-      <strong>Northeastern University graduate.</strong> B.S. Mechanical Engineering with co-op experience at Draper Laboratory and QinetiQ. Graduate Certificate in Data Analytics Engineering.
-    </p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn btn-dark">Get in touch</a>
-      <a href="https://www.linkedin.com/in/ayushma/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
-      <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_f5b35800999c470ba4bc0db0702dec63.pdf" target="_blank" class="btn btn-ghost">Resume ↗</a>
+    <div class="hero-left">
+      <p class="hero-tag">Mechanical Engineer · Data Analytics</p>
+      <h1 class="hero-name">Ayush<br/><em>Maurya.</em></h1>
+      <p class="hero-desc">
+        <strong>Northeastern University graduate.</strong> B.S. Mechanical Engineering with co-op experience at Draper Laboratory and QinetiQ. Graduate Certificate in Data Analytics Engineering.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-dark">Get in touch</a>
+        <a href="https://www.linkedin.com/in/ayushma/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+        <a href="https://84abb114-66cc-437b-a9e7-c02f0f241466.filesusr.com/ugd/85c03d_f5b35800999c470ba4bc0db0702dec63.pdf" target="_blank" class="btn btn-ghost">Resume ↗</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Co-ops Completed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Projects Built</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">BS</span>
+          <span class="stat-label">Mech. Engineering</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">GC</span>
+          <span class="stat-label">Data Analytics Eng.</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">2</span>
-        <span class="stat-label">Co-ops Completed</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">5+</span>
-        <span class="stat-label">Projects Built</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">BS</span>
-        <span class="stat-label">Mech. Engineering</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">GC</span>
-        <span class="stat-label">Data Analytics Eng.</span>
-      </div>
+    <!-- Photos: main face photo spans full width, two smaller below -->
+    <div class="hero-photos">
+      <img class="hero-photo-main"
+        src="https://static.wixstatic.com/media/85c03d_67eb3e727a814bc782d74a35dad742b2~mv2.jpeg/v1/fill/w_588,h_557,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_4171_HEIC.jpeg"
+        alt="Ayush Maurya"/>
+      <img class="hero-photo-sm"
+        src="https://static.wixstatic.com/media/85c03d_efa1ea8e38214cc99449e0d19ee1faca~mv2.jpg/v1/fill/w_294,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2023.jpg"
+        alt="Ayush"/>
+      <img class="hero-photo-sm"
+        src="https://static.wixstatic.com/media/85c03d_fb41909ebb9a4415a3c99c39b633f9f6~mv2.jpg/v1/fill/w_294,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2340_JPG.jpg"
+        alt="Ayush"/>
     </div>
   </section>
 
